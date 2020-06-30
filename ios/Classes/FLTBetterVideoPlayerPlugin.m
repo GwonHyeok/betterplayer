@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#import "FLTVideoPlayerPlugin.h"
+#import "FLTBetterVideoPlayerPlugin.h"
 #import <AVFoundation/AVFoundation.h>
 #import <GLKit/GLKit.h>
 
@@ -512,19 +512,19 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 
 @end
 
-@interface FLTVideoPlayerPlugin ()
+@interface FLTBetterVideoPlayerPlugin ()
 @property(readonly, weak, nonatomic) NSObject<FlutterTextureRegistry>* registry;
 @property(readonly, weak, nonatomic) NSObject<FlutterBinaryMessenger>* messenger;
 @property(readonly, strong, nonatomic) NSMutableDictionary* players;
 @property(readonly, strong, nonatomic) NSObject<FlutterPluginRegistrar>* registrar;
 @end
 
-@implementation FLTVideoPlayerPlugin
+@implementation FLTBetterVideoPlayerPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   FlutterMethodChannel* channel =
-      [FlutterMethodChannel methodChannelWithName:@"flutter.io/videoPlayer"
+      [FlutterMethodChannel methodChannelWithName:@"jhomlala.com/betterPlayer"
                                   binaryMessenger:[registrar messenger]];
-  FLTVideoPlayerPlugin* instance = [[FLTVideoPlayerPlugin alloc] initWithRegistrar:registrar];
+  FLTBetterVideoPlayerPlugin* instance = [[FLTBetterVideoPlayerPlugin alloc] initWithRegistrar:registrar];
   [registrar addMethodCallDelegate:instance channel:channel];
   [registrar publish:instance];
 }
@@ -553,7 +553,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
   int64_t textureId = [_registry registerTexture:player];
   frameUpdater.textureId = textureId;
   FlutterEventChannel* eventChannel = [FlutterEventChannel
-      eventChannelWithName:[NSString stringWithFormat:@"flutter.io/videoPlayer/videoEvents%lld",
+      eventChannelWithName:[NSString stringWithFormat:@"jhomlala.com/betterPlayer/videoEvents%lld",
                                                       textureId]
            binaryMessenger:_messenger];
   [eventChannel setStreamHandler:player];

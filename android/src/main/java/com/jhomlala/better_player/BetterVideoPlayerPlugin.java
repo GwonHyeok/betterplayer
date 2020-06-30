@@ -20,15 +20,15 @@ import io.flutter.view.TextureRegistry;
 import java.util.Map;
 
 /** Android platform implementation of the VideoPlayerPlugin. */
-public class VideoPlayerPlugin implements MethodCallHandler, FlutterPlugin {
-  private static final String TAG = "VideoPlayerPlugin";
+public class BetterVideoPlayerPlugin implements MethodCallHandler, FlutterPlugin {
+  private static final String TAG = "BetterVideoPlayerPlugin";
   private final LongSparseArray<VideoPlayer> videoPlayers = new LongSparseArray<>();
   private FlutterState flutterState;
 
   /** Register this with the v2 embedding for the plugin to respond to lifecycle callbacks. */
-  public VideoPlayerPlugin() {}
+  public BetterVideoPlayerPlugin() {}
 
-  private VideoPlayerPlugin(Registrar registrar) {
+  private BetterVideoPlayerPlugin(Registrar registrar) {
     this.flutterState =
         new FlutterState(
             registrar.context(),
@@ -41,7 +41,7 @@ public class VideoPlayerPlugin implements MethodCallHandler, FlutterPlugin {
 
   /** Registers this with the stable v1 embedding. Will not respond to lifecycle events. */
   public static void registerWith(Registrar registrar) {
-    final VideoPlayerPlugin plugin = new VideoPlayerPlugin(registrar);
+    final BetterVideoPlayerPlugin plugin = new BetterVideoPlayerPlugin(registrar);
     registrar.addViewDestroyListener(
         view -> {
           plugin.onDestroy();
@@ -102,7 +102,7 @@ public class VideoPlayerPlugin implements MethodCallHandler, FlutterPlugin {
               flutterState.textureRegistry.createSurfaceTexture();
           EventChannel eventChannel =
               new EventChannel(
-                  flutterState.binaryMessenger, "flutter.io/videoPlayer/videoEvents" + handle.id());
+                  flutterState.binaryMessenger, "jhomlala.com/betterPlayer/videoEvents" + handle.id());
 
           VideoPlayer player =
               new VideoPlayer(flutterState.applicationContext, eventChannel, handle, result);
@@ -218,10 +218,10 @@ public class VideoPlayerPlugin implements MethodCallHandler, FlutterPlugin {
       this.keyForAsset = keyForAsset;
       this.keyForAssetAndPackageName = keyForAssetAndPackageName;
       this.textureRegistry = textureRegistry;
-      methodChannel = new MethodChannel(messenger, "flutter.io/videoPlayer");
+      methodChannel = new MethodChannel(messenger, "jhomlala.com/betterPlayer");
     }
 
-    void startListening(VideoPlayerPlugin methodCallHandler) {
+    void startListening(BetterVideoPlayerPlugin methodCallHandler) {
       methodChannel.setMethodCallHandler(methodCallHandler);
     }
 

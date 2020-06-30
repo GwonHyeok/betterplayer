@@ -10,7 +10,7 @@ import 'package:flutter/widgets.dart';
 
 import 'video_player_platform_interface.dart';
 
-const MethodChannel _channel = MethodChannel('flutter.io/videoPlayer');
+const MethodChannel _channel = MethodChannel('jhomlala.com/betterPlayer');
 
 /// An implementation of [VideoPlayerPlatform] that uses method channels.
 class MethodChannelVideoPlayer extends VideoPlayerPlatform {
@@ -182,7 +182,7 @@ class MethodChannelVideoPlayer extends VideoPlayerPlatform {
   }
 
   EventChannel _eventChannelFor(int textureId) {
-    return EventChannel('flutter.io/videoPlayer/videoEvents$textureId');
+    return EventChannel('jhomlala.com/betterPlayer/videoEvents$textureId');
   }
 
   DurationRange _toDurationRange(dynamic value) {
